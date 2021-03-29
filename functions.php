@@ -45,10 +45,10 @@ function display_winners(array $winners) :string
 function add_winner($db)
 {
     if ($_POST) {
-        $query = $db->prepare('INSERT INTO `booker_winners` (`prize_year`, `author_name`, `book_name` `author_nationality`) VALUES (:prize_year, :author_name, :book_name, :author_nationality);');
+        $query = $db->prepare('INSERT INTO `booker_winners` (`prize_year`, `author_name`, `book_name`, `author_nationality`) VALUES (:prize_year, :author_name, :book_name, :author_nationality);');
         $query->bindParam(':prize_year', $_POST['prize_year']);
         $query->bindParam(':author_name', $_POST['author_name']);
-        $query->bindParam(':book_title', $_POST['book_title']);
+        $query->bindParam(':book_name', $_POST['book_name']);
         $query->bindParam(':author_nationality', $_POST['author_nationality']);
         $query->execute();
         echo 'Thanks for adding more winners.';

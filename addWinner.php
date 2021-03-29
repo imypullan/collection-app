@@ -9,8 +9,8 @@ $db = getDb();
     <link rel="stylesheet" href="normalize.css">
     <title>Booker Prize Winners</title>
 </head>
-<body>
 
+<body>
     <div class="addWinner">
         <form action="addWinner.php" method="post">
             <h4>Add other winners:</h4>
@@ -18,8 +18,8 @@ $db = getDb();
             <div><input type="number" placeholder="Year" name="prize_year" min="1969" required/></div>
             <div><label for="author_name">Author's name</label></body>
             <div><input type="text" placeholder="Author's name" name="author_name" required/></div>
-            <div><label for="book_title">Title</label></div>
-            <div><input type="text" placeholder="Title" name="book_title" required/></div>
+            <div><label for="book_name">Title</label></div>
+            <div><input type="text" placeholder="Title" name="book_name" required/></div>
             <div><label for="author_nationality">Author's nationality</label></div>
             <div><input type="text" placeholder="Author's nationality" name="author_nationality" required/></div>
             <div><input type="submit" /></div>

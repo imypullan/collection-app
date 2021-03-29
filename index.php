@@ -17,16 +17,15 @@ $winners = $query->fetchAll();
 </head>
 <body>
 
-<h1>Booker Prize Winners</h1>
+    <h1>Booker Prize Winners</h1>
 
 <?php
 echo display_winners($winners);
 ?>
 
-<div class="addWinner">
-    <span><a href="addWinner.php">Add other winners:</a></span>
-</div>
-
+    <div class="addWinner">
+      <span><a href="addWinner.php">Add other winners:</a></span>
+    </div>
 
 
 </body>
