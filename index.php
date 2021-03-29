@@ -21,6 +21,19 @@ require_once 'functions.php';
 
 <h1>Booker Prize Winners</h1>
 
+<form action="addWinner.php">
+    <h4>Add other winners:</h4>
+    <label for="prize_year">Prize year</label><br />
+    <input type="number" placeholder="Year" /><br />
+    <label for="author_name">Author's name</label><br />
+    <input type="text" placeholder="Author's name" /><br />
+    <label for="book_title">Title</label><br />
+    <input type="text" placeholder="Title" /><br />
+    <label for="author_nationality">Author's nationality</label><br />
+    <input type="text" placeholder="Author's nationality" /><br />
+    <input type="submit" />
+</form>
+
 <?php
 display_winners($winners);
 ?>
