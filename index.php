@@ -1,13 +1,12 @@
 <?php
-
-$db = new PDO('mysql:host=db; dbname=booker_winners', 'root', 'password');
-$db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+require 'functions.php';
+$db = getDb();
 
 $query = $db->prepare('SELECT `prize_year`, `author_name`, `book_name`, `author_nationality` FROM `booker_winners`;');
 $query->execute();
 $winners = $query->fetchAll();
 
-require 'functions.php';
+
 ?>
 
 <html>
@@ -19,7 +18,6 @@ require 'functions.php';
 <body>
 
 <h1>Booker Prize Winners</h1>
-
 
 <?php
 echo display_winners($winners);

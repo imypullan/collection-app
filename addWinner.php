@@ -1,19 +1,36 @@
 <?php
+require 'functions.php';
+$db = getDb();
 ?>
 
-<div class="addWinner">
-    <form action="addWinner.php" method="post">
-     <h4>Add other winners:</h4>
-        <label for="prize_year">Prize year</label><br />
-        <input type="number" placeholder="Year" name="prize_year"/><br />
-        <label for="author_name">Author's name</label><br />
-        <input type="text" placeholder="Author's name" name="author_name"/><br />
-        <label for="book_title">Title</label><br />
-        <input type="text" placeholder="Title" name="book_title" /><br />
-        <label for="author_nationality">Author's nationality</label><br />
-        <input type="text" placeholder="Author's nationality" name="author_nationality" /><br />
-        <input type="submit" />
-    </form>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="normalize.css">
+    <title>Booker Prize Winners</title>
+</head>
+<body>
 
-    <span></span><a href="index.php">Go back</a></span>
-</div>
+    <div class="addWinner">
+        <form action="addWinner.php" method="post">
+            <h4>Add other winners:</h4>
+            <div><label for="prize_year">Prize year</label></div>
+            <div><input type="number" placeholder="Year" name="prize_year" min="1969" required/></div>
+            <div><label for="author_name">Author's name</label></body>
+            <div><input type="text" placeholder="Author's name" name="author_name" required/></div>
+            <div><label for="book_title">Title</label></div>
+            <div><input type="text" placeholder="Title" name="book_title" required/></div>
+            <div><label for="author_nationality">Author's nationality</label></div>
+            <div><input type="text" placeholder="Author's nationality" name="author_nationality" required/></div>
+            <div><input type="submit" /></div>
+        </form>
+
+         <span></span><a href="index.php">Go back</a></span>
+    </div>
+
+<?php
+    add_winner($db);
+?>
+
+</body>
+</html>
