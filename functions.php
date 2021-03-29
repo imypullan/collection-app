@@ -3,15 +3,18 @@
  *
  * @param $winners array
  *
- * echoes list by field, no return
+ * returns string of all winners
  */
-function display_winners(array $winners)
+function display_winners(array $winners) :string
 {
+    $output = '';
 foreach ($winners as $winner) {
-echo '<h2>Prize year: ' . $winner['prize_year'] . '</h2>';
-echo '<span>Author: ' . $winner['author_name'] . '</span><br />';
-echo '<span>Title: ' . $winner['book_name'] . '</span><br />';
-echo '<span>Author nationality: ' . $winner['author_nationality'] . '</span><br />';
+    $output .= '<h2>Prize year: ' . $winner['prize_year'] . '</h2>';
+    $output .= '<span>Author: ' . $winner['author_name'] . '</span><br />';
+    $output .= '<span>Title: ' . $winner['book_name'] . '</span><br />';
+    $output .= '<span>Author nationality: ' . $winner['author_nationality'] . '</span><br />';
 }
+    return $output;
 }
+
 

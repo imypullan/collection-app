@@ -7,8 +7,7 @@ $query = $db->prepare('SELECT `prize_year`, `author_name`, `book_name`, `author_
 $query->execute();
 $winners = $query->fetchAll();
 
-require_once 'functions.php';
-
+require 'functions.php';
 ?>
 
 <html>
@@ -35,8 +34,11 @@ require_once 'functions.php';
         <input type="submit" />
     </form>
 </div>
+
 <?php
-display_winners($winners);
+
+echo display_winners($winners);
+
 ?>
 
 
