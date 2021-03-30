@@ -15,7 +15,7 @@ $db = getDb();
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
             <h3>Add other winners:</h3>
             <div><label for="prize_year">Prize year:</label></div>
-            <div><input type="number" placeholder="Year" name="prize_year" min="1969"/></div>
+            <div><input type="number" placeholder="Year" name="prize_year"/></div>
             <div><label for="author_name">Author's name:</label>
             <div><input type="text" placeholder="Author's name" name="author_name"/></div>
             <div><label for="book_name">Title:</label></div>
@@ -29,7 +29,7 @@ $db = getDb();
     </div>
 
 <?php
-if($_POST)
+if(isset($_POST))
 {
     test_input();
     add_winner($db);

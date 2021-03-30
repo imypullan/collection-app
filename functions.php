@@ -5,7 +5,7 @@
  *
  * @return PDO
  */
-function getDb() {
+function getDb() :PDO {
     $db = new PDO('mysql:host=db;dbname=booker_winners', 'root', 'password');
     $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -56,18 +56,15 @@ function validate_input(string $data) :string
  */
 function test_input() :array
 {
-    if(isset($_POST['prize_year']) && isset($_POST['author_name']) && isset($_POST['book_name']) && isset($_POST['author_nationality'])) {
-        $_POST['prize_year'] = validate_input($_POST['prize_year']);
-        $_POST['author_name'] = validate_input($_POST['author_name']);
-        $_POST['book_name'] = validate_input($_POST['book_name']);
-        $_POST['author_nationality'] = validate_input($_POST['author_nationality']);
-        var_dump($_POST);
-        return $_POST;
-    }
-    else {
-        echo "Please fill in all fields.";
-        return false;
-    }
+    if (count($_POST) > 0) {
+        if ($_POST['prize_year'] > 1968 && $_POST['author_name'] != "" && $_POST['book_name'] != "" && $_POST['author_nationality'] != "") {
+            $_POST['prize_year'] = validate_input($_POST['prize_year']);
+            $_POST['author_name'] = validate_input($_POST['author_name']);
+            $_POST['book_name'] = validate_input($_POST['book_name']);
+            $_POST['author_nationality'] = validate_input($_POST['author_nationality']);
+            return $_POST;
+        }
+        } return [];
 }
 
 /*
@@ -79,19 +76,19 @@ function test_input() :array
  */
 function add_winner(object $db) :bool
 {
-    if (isset($_POST['prize_year']) && isset($_POST['author_name']) && isset($_POST['book_name']) && isset($_POST['author_nationality']))
-    {
-        $query = $db->prepare('INSERT INTO `booker_winners` (`prize_year`, `author_name`, `book_name`, `author_nationality`) VALUES (:prize_year, :author_name, :book_name, :author_nationality);');
-        $query->bindParam(':prize_year', $_POST['prize_year']);
-        $query->bindParam(':author_name', $_POST['author_name']);
-        $query->bindParam(':book_name', $_POST['book_name']);
-        $query->bindParam(':author_nationality', $_POST['author_nationality']);
-        $query->execute();
-        echo 'Thanks for adding more winners.';
-        return true;
-    }
-    else {
-        echo "Please fill in all fields.";
-        return false;
+    if (!empty($_POST)) {
+        if ($_POST['prize_year'] > 1968 && $_POST['author_name'] != "" && $_POST['book_name'] != "" && $_POST['author_nationality'] != "") {
+            $query = $db->prepare('INSERT INTO `booker_winners` (`prize_year`, `author_name`, `book_name`, `author_nationality`) VALUES (:prize_year, :author_name, :book_name, :author_nationality);');
+            $query->bindParam(':prize_year', $_POST['prize_year']);
+            $query->bindParam(':author_name', $_POST['author_name']);
+            $query->bindParam(':book_name', $_POST['book_name']);
+            $query->bindParam(':author_nationality', $_POST['author_nationality']);
+            $query->execute();
+            echo 'Thanks for adding more winners.';
+            return true;
+          } else {
+            echo "Please fill in all fields.";
+            return false;
+        }
     }
 }
