@@ -57,7 +57,7 @@ function validate_input(string $data) :string
 function test_input() :array
 {
     if (count($_POST) > 0) {
-        if ($_POST['prize_year'] > 1968 && $_POST['author_name'] != "" && $_POST['book_name'] != "" && $_POST['author_nationality'] != "") {
+      {
             $_POST['prize_year'] = validate_input($_POST['prize_year']);
             $_POST['author_name'] = validate_input($_POST['author_name']);
             $_POST['book_name'] = validate_input($_POST['book_name']);
@@ -77,7 +77,12 @@ function test_input() :array
 function add_winner(object $db) :bool
 {
     if (!empty($_POST)) {
-        if ($_POST['prize_year'] > 1968 && $_POST['author_name'] != "" && $_POST['book_name'] != "" && $_POST['author_nationality'] != "") {
+        if (($_POST['prize_year'] > 1968 && $_POST['prize_year'] <= date("Y"))
+            && ($_POST['author_name'] != "" && $_POST['book_name'] != "" && $_POST['author_nationality'] != "")
+            && (strlen($_POST['author_name']) > 6 && strlen($_POST['author_name']) < 200)
+                && (strlen($_POST['book_name']) > 6 && strlen($_POST['book_name']) < 300)
+                    && (strlen($_POST['author_nationality']) > 2 && strlen($_POST['author_nationality']) < 50))
+                    {
             $query = $db->prepare('INSERT INTO `booker_winners` (`prize_year`, `author_name`, `book_name`, `author_nationality`) VALUES (:prize_year, :author_name, :book_name, :author_nationality);');
             $query->bindParam(':prize_year', $_POST['prize_year']);
             $query->bindParam(':author_name', $_POST['author_name']);
@@ -90,5 +95,7 @@ function add_winner(object $db) :bool
             echo "Please fill in all fields.";
             return false;
         }
+    } else {
+        return false;
     }
 }
