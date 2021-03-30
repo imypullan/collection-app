@@ -15,16 +15,15 @@ class Functions extends TestCase
         $this->assertIsString($result);
     }
 
-    public function testDisplay_winners_failure() {
+    public function testDisplay_winners_malformed() {
         $this->expectException(TypeError::class);
         display_winners(42);
     }
 
-    public function testTest_input_success() {
-        $data = "      \<html> spaces \ ";
+    public function testValidate_input_success() {
+        $data = "      \spaces\ ";
         $sanitized = validate_input($data);
-        $expected = "<html> spaces";
+        $expected = "spaces";
         $this->assertEquals($sanitized, $expected);
-
     }
 }
