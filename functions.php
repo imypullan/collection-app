@@ -5,7 +5,8 @@
  *
  * @return PDO
  */
-function getDb() :PDO {
+function getDb() :PDO
+{
     $db = new PDO('mysql:host=db;dbname=booker_winners', 'root', 'password');
     $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -16,7 +17,7 @@ function getDb() :PDO {
  *
  * @param $winners array
  *
- * returns string of all winners
+ * @return string of all winners
  */
 function display_winners(array $winners) :string
 {
@@ -39,7 +40,7 @@ function display_winners(array $winners) :string
  *
  * @param string data by reference
  *
- * returns validated entries
+ * @return validated entries
  */
 function validate_input(string $data) :string
 {
@@ -50,9 +51,9 @@ function validate_input(string $data) :string
 }
 
 /*
- * passes each field entry through validation function validate_input
+ * if input received, passes each field entry through validation function
  *
- * returns array of validated user input
+ * @return array of validated user input
  */
 function test_input() :array
 {
@@ -63,12 +64,12 @@ function test_input() :array
             $_POST['book_name'] = validate_input($_POST['book_name']);
             $_POST['author_nationality'] = validate_input($_POST['author_nationality']);
             return $_POST;
-        }
-        } return [];
+      }
+    } return [];
 }
 
 /*
- * Inserts a new winner into the DB
+ * Inserts new entry into the DB
  *
  * @param object DB of previous winners
  *
