@@ -20,10 +20,24 @@ class Functions extends TestCase
         display_winners(42);
     }
 
+    public function testDisplay_winners_failure() {
+        $winners = [];
+        $result = display_winners($winners);
+        $expected = 'There are no winners.';
+        $this->assertEquals($result, $expected);
+    }
+
     public function testValidate_input_success() {
         $data = "      \spaces\ ";
         $sanitized = validate_input($data);
         $expected = "spaces";
         $this->assertEquals($sanitized, $expected);
     }
+
+    public function testValidate_input_malformed() {
+        $this->expectException(TypeError::class);
+        $data = ["i", "hate", "tests"];
+        validate_input($data);
+    }
+
 }

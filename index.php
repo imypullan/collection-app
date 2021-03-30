@@ -1,12 +1,7 @@
 <?php
 require 'functions.php';
 $db = getDb();
-
-$query = $db->prepare('SELECT `prize_year`, `author_name`, `book_name`, `author_nationality` FROM `booker_winners`;');
-$query->execute();
-$winners = $query->fetchAll();
-
-
+$winners = getWinners($db);
 ?>
 
 <html>

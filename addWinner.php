@@ -31,8 +31,8 @@ $db = getDb();
 <?php
 if(isset($_POST))
 {
-    test_input();
-    add_winner($db);
+    $winner = test_input();
+    add_winner($db, $winner);
 }
 ?>
 

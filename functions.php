@@ -13,6 +13,14 @@ function getDb() :PDO
     return $db;
 }
 
+function getWinners($db)
+{
+    $query = $db->prepare('SELECT `prize_year`, `author_name`, `book_name`, `author_nationality` FROM `booker_winners`;');
+    $query->execute();
+    $winners = $query->fetchAll();
+    return $winners;
+}
+
 /* displays list of DB info
  *
  * @param $winners array
@@ -30,6 +38,7 @@ function display_winners(array $winners) :string
             $output .= '<div><span>Author: ' . $winner['author_name'] . '</span></div>';
             $output .= '<div><span>Title: ' . $winner['book_name'] . '</span></div>';
             $output .= '<div><span>Author nationality: ' . $winner['author_nationality'] . '</span></div>';
+            $output .= '<form method="post" action="delete.php"><input type="submit" name="delete" value="Delete"></form>';
         }
     }
     return $output;
@@ -59,11 +68,12 @@ function test_input() :array
 {
     if (count($_POST) > 0) {
       {
-            $_POST['prize_year'] = validate_input($_POST['prize_year']);
-            $_POST['author_name'] = validate_input($_POST['author_name']);
-            $_POST['book_name'] = validate_input($_POST['book_name']);
-            $_POST['author_nationality'] = validate_input($_POST['author_nationality']);
-            return $_POST;
+            $winner = [];
+            $winner['prize_year'] = validate_input($_POST['prize_year']);
+            $winner['author_name'] = validate_input($_POST['author_name']);
+            $winner['book_name'] = validate_input($_POST['book_name']);
+            $winner['author_nationality'] = validate_input($_POST['author_nationality']);
+            return $winner;
       }
     } return [];
 }
@@ -72,23 +82,24 @@ function test_input() :array
  * Inserts new entry into the DB
  *
  * @param object DB of previous winners
+ * @param validated array
  *
  * @return bool
  */
-function add_winner(object $db) :bool
+function add_winner(object $db, array $winner) :bool
 {
     if (!empty($_POST)) {
-        if (($_POST['prize_year'] > 1968 && $_POST['prize_year'] <= date("Y"))
-            && ($_POST['author_name'] != "" && $_POST['book_name'] != "" && $_POST['author_nationality'] != "")
-            && (strlen($_POST['author_name']) > 6 && strlen($_POST['author_name']) < 200)
-                && (strlen($_POST['book_name']) > 6 && strlen($_POST['book_name']) < 300)
-                    && (strlen($_POST['author_nationality']) > 2 && strlen($_POST['author_nationality']) < 50))
+        if (($winner['prize_year'] > 1968 && $winner['prize_year'] <= date("Y"))
+            && ($winner['author_name'] != "" && $winner['book_name'] != "" && $winner['author_nationality'] != "")
+            && (strlen($winner['author_name']) > 6 && strlen($winner['author_name']) < 200)
+                && (strlen($winner['book_name']) > 6 && strlen($winner['book_name']) < 300)
+                    && (strlen($winner['author_nationality']) > 2 && strlen($winner['author_nationality']) < 50))
                     {
             $query = $db->prepare('INSERT INTO `booker_winners` (`prize_year`, `author_name`, `book_name`, `author_nationality`) VALUES (:prize_year, :author_name, :book_name, :author_nationality);');
-            $query->bindParam(':prize_year', $_POST['prize_year']);
-            $query->bindParam(':author_name', $_POST['author_name']);
-            $query->bindParam(':book_name', $_POST['book_name']);
-            $query->bindParam(':author_nationality', $_POST['author_nationality']);
+            $query->bindParam(':prize_year', $winner['prize_year']);
+            $query->bindParam(':author_name', $winner['author_name']);
+            $query->bindParam(':book_name', $winner['book_name']);
+            $query->bindParam(':author_nationality', $winner['author_nationality']);
             $query->execute();
             echo 'Thanks for adding more winners.';
             return true;
