@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.33)
 # Database: booker_winners
-# Generation Time: 2021-03-29 10:51:47 +0000
+# Generation Time: 2021-03-30 15:41:39 +0000
 # ************************************************************
 
 
@@ -32,22 +32,21 @@ CREATE TABLE `booker_winners` (
   `author_name` varchar(150) DEFAULT NULL,
   `book_name` varchar(300) DEFAULT NULL,
   `author_nationality` varchar(100) DEFAULT NULL,
+  `deleted` tinyint(1) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 LOCK TABLES `booker_winners` WRITE;
 /*!40000 ALTER TABLE `booker_winners` DISABLE KEYS */;
 
-INSERT INTO `booker_winners` (`id`, `prize_year`, `author_name`, `book_name`, `author_nationality`)
+INSERT INTO `booker_winners` (`id`, `prize_year`, `author_name`, `book_name`, `author_nationality`, `deleted`)
 VALUES
-	(1,'2020','Douglas Stuart','Shuggie Bain','Scottish-American'),
-	(2,'2019','Margaret Atwood','The Testaments','Canadian'),
-	(3,'2019','Bernardine Evaristo','Girl, Woman, Other','British'),
-	(4,'2018','Anna Burns','Milkman','Irish'),
-	(5,'2017','George Saunders','Lincoln in the Bardo','American'),
-	(6,'2016','Paul Beatty','The Sellout','American'),
-	(7,'2015','Marlon James','A Brief History of Seven Killings','Jamaican'),
-	(8,'2014','Richard Flanagan','The Narrow Road to the Deep North','Australian');
+	(1,'2020','Douglas Stuart','Shuggie Bain','Scottish-American',0),
+	(2,'2019','Margaret Atwood','The Testaments','Canadian',0),
+	(3,'2019','Bernardine Evaristo','Girl, Woman, Other','British',0),
+	(4,'2018','Anna Burns','Milkman','Irish',0),
+	(5,'2017','George Saunders','Lincoln in the Bardo','American',1),
+	(6,'2016','Paul Beatty','The Sellout','American',1);
 
 /*!40000 ALTER TABLE `booker_winners` ENABLE KEYS */;
 UNLOCK TABLES;
