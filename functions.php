@@ -15,7 +15,7 @@ function getDb() :PDO
 
 function getWinners($db)
 {
-    $query = $db->prepare('SELECT `prize_year`, `author_name`, `book_name`, `author_nationality` FROM `booker_winners`;');
+    $query = $db->prepare('SELECT `id`, `prize_year`, `author_name`, `book_name`, `author_nationality` FROM `booker_winners` WHERE `deleted` = 0;');
     $query->execute();
     $winners = $query->fetchAll();
     return $winners;
@@ -38,7 +38,8 @@ function display_winners(array $winners) :string
             $output .= '<div><span>Author: ' . $winner['author_name'] . '</span></div>';
             $output .= '<div><span>Title: ' . $winner['book_name'] . '</span></div>';
             $output .= '<div><span>Author nationality: ' . $winner['author_nationality'] . '</span></div>';
-            $output .= '<form method="post" action="delete.php"><input type="submit" name="delete" value="Delete"></form>';
+            $output .= '<div><form method="post" action="delete.php"><input type="submit" name="delete" value="Delete">
+                        <input type="hidden" name="id" value="' . $winner['id'] . '"/></form></div>';
         }
     }
     return $output;
