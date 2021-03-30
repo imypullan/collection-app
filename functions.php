@@ -1,7 +1,6 @@
 <?
 
-
-/**
+/*
  * Returns a new PDO connection
  *
  * @return PDO
@@ -9,6 +8,7 @@
 function getDb() {
     $db = new PDO('mysql:host=db;dbname=booker_winners', 'root', 'password');
     $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     return $db;
 }
 
@@ -35,16 +35,52 @@ function display_winners(array $winners) :string
 }
 
 /*
+ * validates user input on server side
+ *
+ * @param string data by reference
+ *
+ * returns validated entries
+ */
+function validate_input(string $data) :string
+{
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+
+/*
+ * passes each field entry through validation function validate_input
+ *
+ * returns array of validated user input
+ */
+function test_input() :array
+{
+    if(isset($_POST['prize_year']) && isset($_POST['author_name']) && isset($_POST['book_name']) && isset($_POST['author_nationality'])) {
+        $_POST['prize_year'] = validate_input($_POST['prize_year']);
+        $_POST['author_name'] = validate_input($_POST['author_name']);
+        $_POST['book_name'] = validate_input($_POST['book_name']);
+        $_POST['author_nationality'] = validate_input($_POST['author_nationality']);
+        var_dump($_POST);
+        return $_POST;
+    }
+    else {
+        echo "Please fill in all fields.";
+        return false;
+    }
+}
+
+/*
  * Inserts a new winner into the DB
  *
- * @param DB of previous winners
+ * @param object DB of previous winners
  *
  * @return bool
- *
  */
-function add_winner($db)
+function add_winner(object $db) :bool
 {
-    if ($_POST) {
+    if (isset($_POST['prize_year']) && isset($_POST['author_name']) && isset($_POST['book_name']) && isset($_POST['author_nationality']))
+    {
         $query = $db->prepare('INSERT INTO `booker_winners` (`prize_year`, `author_name`, `book_name`, `author_nationality`) VALUES (:prize_year, :author_name, :book_name, :author_nationality);');
         $query->bindParam(':prize_year', $_POST['prize_year']);
         $query->bindParam(':author_name', $_POST['author_name']);
@@ -53,5 +89,9 @@ function add_winner($db)
         $query->execute();
         echo 'Thanks for adding more winners.';
         return true;
+    }
+    else {
+        echo "Please fill in all fields.";
+        return false;
     }
 }

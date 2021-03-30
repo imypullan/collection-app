@@ -12,24 +12,28 @@ $db = getDb();
 
 <body>
     <div class="addWinner">
-        <form action="addWinner.php" method="post">
-            <h4>Add other winners:</h4>
-            <div><label for="prize_year">Prize year</label></div>
-            <div><input type="number" placeholder="Year" name="prize_year" min="1969" required/></div>
-            <div><label for="author_name">Author's name</label></body>
-            <div><input type="text" placeholder="Author's name" name="author_name" required/></div>
-            <div><label for="book_name">Title</label></div>
-            <div><input type="text" placeholder="Title" name="book_name" required/></div>
-            <div><label for="author_nationality">Author's nationality</label></div>
-            <div><input type="text" placeholder="Author's nationality" name="author_nationality" required/></div>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+            <h3>Add other winners:</h3>
+            <div><label for="prize_year">Prize year:</label></div>
+            <div><input type="number" placeholder="Year" name="prize_year" min="1969"/></div>
+            <div><label for="author_name">Author's name:</label>
+            <div><input type="text" placeholder="Author's name" name="author_name"/></div>
+            <div><label for="book_name">Title:</label></div>
+            <div><input type="text" placeholder="Title" name="book_name"/></div>
+            <div><label for="author_nationality">Author's nationality:</label></div>
+            <div><input type="text" placeholder="Author's nationality" name="author_nationality"/></div>
             <div><input type="submit" /></div>
         </form>
 
-         <span></span><a href="index.php">Go back</a></span>
+         <span><a href="index.php">Go back</a></span>
     </div>
 
 <?php
+if($_POST)
+{
+    test_input();
     add_winner($db);
+}
 ?>
 
 </body>
