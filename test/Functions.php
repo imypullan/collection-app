@@ -8,8 +8,8 @@ class Functions extends TestCase
 {
     public function testDisplay_winners_success() {
         $winners = [
-            ['prize_year' => '2020', 'author_name' => 'Douglas Stuart', 'book_name' => 'Shuggie Bain', 'author_nationality' => 'Scottish-American'],
-            ['prize_year' => '1900', 'author_name' => 'foo', 'book_name' => 'bar', 'author_nationality' => 'bar']
+            ['id' => 4, 'prize_year' => '2020', 'author_name' => 'Douglas Stuart', 'book_name' => 'Shuggie Bain', 'author_nationality' => 'Scottish-American'],
+            ['id' => 3, 'prize_year' => '1900', 'author_name' => 'foo', 'book_name' => 'bar', 'author_nationality' => 'bar']
         ];
         $result = display_winners($winners);
         $this->assertIsString($result);
