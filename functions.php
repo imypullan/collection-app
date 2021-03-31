@@ -78,7 +78,9 @@ function test_input() :array
 {
     if (count($_POST) > 0) {
       {
-          $winner['id'] = validate_input($_POST['id']);
+          if (isset($_POST['id'])){
+              $winner['id'] = $_POST['id'];
+          }
           $winner['prize_year'] = validate_input($_POST['prize_year']);
           $winner['author_name'] = validate_input($_POST['author_name']);
           $winner['book_name'] = validate_input($_POST['book_name']);
