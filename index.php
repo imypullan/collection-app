@@ -22,7 +22,7 @@ echo display_winners($winners);
     </div>
 
     <div class="add_winners">
-        <a href="addWinner.php"><button class="add_winners">Add other winners</button></a>
+        <a href="add_winner.php"><button class="add_winners">Add other winners</button></a>
     </div>
 
 

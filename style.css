@@ -81,9 +81,9 @@ button.add_winners a{
     font-size: 1.1rem;
 }
 
-.add_db_entry input {
-    height: 30px;
-    width: 150px;
+input {
+    width: 220;
+    height: 35;
     border: 1px solid #000;
 }
 
@@ -102,10 +102,4 @@ button.add_winners a{
 
 .return a{
     color: #FFF;
-}
-
-/* edit page */
-
-.edit_db_entry {
-    display: flex;
 }
