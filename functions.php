@@ -5,7 +5,7 @@
  *
  * @return PDO
  */
-function getDb() :PDO
+function get_db() :PDO
 {
     $db = new PDO('mysql:host=db;dbname=booker_winners', 'root', 'password');
     $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
@@ -13,7 +13,7 @@ function getDb() :PDO
     return $db;
 }
 
-function getWinners($db)
+function get_winners($db)
 {
     $query = $db->prepare('SELECT `id`, `prize_year`, `author_name`, `book_name`, `author_nationality` FROM `booker_winners` WHERE `deleted` = 0 ORDER BY `prize_year` DESC;');
     $query->execute();
@@ -38,7 +38,9 @@ function display_winners(array $winners) :string
             $output .= '<div><span class="category_title">Author:</span><span> ' . $winner['author_name'] . '</span></div>';
             $output .= '<div><span class="category_title">Title:</span><span> ' . $winner['book_name'] . '</span></div>';
             $output .= '<div><span class="category_title">Nationality:</span><span> ' . $winner['author_nationality'] . '</span></div>';
-            $output .= '<div><form method="post" action="delete.php"><input type="submit" name="delete" value="Delete" class="delete">
+            $output .= '<div class="delete_edit"><form method="post" action="delete.php"><input type="submit" name="delete" value="Delete" class="delete_edit">
+                        <input type="hidden" name="id" value="' . $winner['id'] . '"/></form>';
+            $output .= '<form method="post" action="edit.php"><input type="submit" name="edit" value="Edit" class="delete_edit">
                         <input type="hidden" name="id" value="' . $winner['id'] . '"/></form></div></div>';
         }
     }
@@ -111,4 +113,20 @@ function add_winner(object $db, array $winner) :bool
     } else {
         return false;
     }
+}
+
+/**
+ * finds the entry to edit
+ *
+ * @param object $db
+ *
+ * @return array
+ */
+function get_winner_info(object $db)
+{
+    $query = $db->prepare('SELECT `id`, `prize_year`, `author_name`, `book_name`, `author_nationality` FROM `booker_winners` WHERE `id` = :id;');
+    $query->bindParam(':id', $_POST['id']);
+    $query->execute();
+    $winner = $query->fetch();
+    return $winner;
 }

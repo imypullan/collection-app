@@ -1,7 +1,7 @@
 <?php
 require 'functions.php';
-$db = getDb();
-$winners = getWinners($db);
+$db = get_db();
+$winners = get_winners($db);
 ?>
 
 <html>

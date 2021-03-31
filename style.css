@@ -34,8 +34,13 @@ span {
     font-weight: 600;
 }
 
-input.delete {
-    margin: 10px 0px 0px 0px;
+div.delete_edit {
+    display: flex;
+    justify-content: center;
+}
+
+input.delete_edit {
+    margin: 10px 10px 0px 10px;
     background-color: #895C74;
     color: #FFF;
     width: 100px;
@@ -77,12 +82,14 @@ button.add_winners a{
 
 .add_db_entry input {
     height: 30px;
+    width: 150px;
     border: 1px solid #000;
 }
 
 .entry_field {
     margin: 10px;
 }
+
 
 .entry_field.submit{
     border: 3px solid #FFF;
