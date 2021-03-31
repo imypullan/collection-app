@@ -4,11 +4,18 @@
 
 body {
     margin: 0 auto;
-    text-align: center;
     font-family: 'raleway'; sans-serif;
 }
 
+span {
+    padding: 10px 0;
+}
+
 /* Index page */
+
+.title {
+    text-align: center;
+}
 
 .winner_list {
     display: flex;
@@ -18,17 +25,13 @@ body {
 
 .winner {
     border: 1px solid #000;
-    width: 300px;
+    width: 350px;
     margin: 20px;
+    text-align: center;
 }
 
-button.add_winners {
-    background-color: #895C74;
-    height: 70px;
-    width: 300px;
-    text-transform: uppercase;
-    color: #FFF;
-    margin-bottom: 50px;
+.category_title {
+    font-weight: 600;
 }
 
 input.delete {
@@ -39,6 +42,15 @@ input.delete {
     height: 40px;
 }
 
+.add_winners {
+    background-color: #895C74;
+    height: 70px;
+    width: 300px;
+    text-transform: uppercase;
+    color: #FFF;
+    margin: 0px auto 50px auto;
+}
+
 button.add_winners a{
     color: #000;
     text-decoration: none;
@@ -46,3 +58,40 @@ button.add_winners a{
 
 /* Add winners page */
 
+.add_db_entry {
+    margin: 100px auto 50px auto;
+    width: 300px;
+    background-color: #895C74;
+    border: 7px solid #000;
+    color: #FFF;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.add_db_entry label {
+    display: block;
+    margin-top: 20px;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.add_db_entry input {
+    height: 30px;
+    border: 1px solid #000;
+}
+
+.entry_field {
+    margin: 10px;
+}
+
+.entry_field.submit{
+    border: 3px solid #FFF;
+    background-color: #000;
+    color: #FFF;
+    height: 40px;
+    width: 100px;
+}
+
+.return a{
+    color: #FFF;
+}

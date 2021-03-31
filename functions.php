@@ -15,7 +15,7 @@ function getDb() :PDO
 
 function getWinners($db)
 {
-    $query = $db->prepare('SELECT `id`, `prize_year`, `author_name`, `book_name`, `author_nationality` FROM `booker_winners` WHERE `deleted` = 0;');
+    $query = $db->prepare('SELECT `id`, `prize_year`, `author_name`, `book_name`, `author_nationality` FROM `booker_winners` WHERE `deleted` = 0 ORDER BY `prize_year` DESC;');
     $query->execute();
     $winners = $query->fetchAll();
     return $winners;
@@ -23,7 +23,7 @@ function getWinners($db)
 
 /* displays list of DB info
  *
- * @param $winners array
+ * @param $winners array c
  *
  * @return string of all winners
  */
@@ -35,9 +35,9 @@ function display_winners(array $winners) :string
     } else {
         foreach ($winners as $winner) {
             $output .= '<div class="winner"><h2>Prize year: ' . $winner['prize_year'] . '</h2>';
-            $output .= '<div><span>Author: ' . $winner['author_name'] . '</span></div>';
-            $output .= '<div><span>Title: ' . $winner['book_name'] . '</span></div>';
-            $output .= '<div><span>Author nationality: ' . $winner['author_nationality'] . '</span></div>';
+            $output .= '<div><span class="category_title">Author:</span><span> ' . $winner['author_name'] . '</span></div>';
+            $output .= '<div><span class="category_title">Title:</span><span> ' . $winner['book_name'] . '</span></div>';
+            $output .= '<div><span class="category_title">Nationality:</span><span> ' . $winner['author_nationality'] . '</span></div>';
             $output .= '<div><form method="post" action="delete.php"><input type="submit" name="delete" value="Delete" class="delete">
                         <input type="hidden" name="id" value="' . $winner['id'] . '"/></form></div></div>';
         }
@@ -102,10 +102,10 @@ function add_winner(object $db, array $winner) :bool
             $query->bindParam(':book_name', $winner['book_name']);
             $query->bindParam(':author_nationality', $winner['author_nationality']);
             $query->execute();
-            echo 'Thanks for adding more winners. Either add more winners or <span><a href="index.php">go back.</a></span>';
+            echo 'Thanks for adding more winners. Either add more winners or <span class="return"><a href="index.php">go back.</a></span>';
             return true;
           } else {
-            echo "Please fill in all fields.";
+            echo '<span class="error_form_incomplete">Please fill in all fields.</span>';
             return false;
         }
     } else {
