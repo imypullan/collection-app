@@ -78,14 +78,36 @@ function test_input() :array
 {
     if (count($_POST) > 0) {
       {
-            $winner = [];
-            $winner['prize_year'] = validate_input($_POST['prize_year']);
-            $winner['author_name'] = validate_input($_POST['author_name']);
-            $winner['book_name'] = validate_input($_POST['book_name']);
-            $winner['author_nationality'] = validate_input($_POST['author_nationality']);
-            return $winner;
+          $winner['id'] = validate_input($_POST['id']);
+          $winner['prize_year'] = validate_input($_POST['prize_year']);
+          $winner['author_name'] = validate_input($_POST['author_name']);
+          $winner['book_name'] = validate_input($_POST['book_name']);
+          $winner['author_nationality'] = validate_input($_POST['author_nationality']);
+          return $winner;
       }
     } return [];
+}
+
+/*
+ * guards against unacceptable entries
+ *
+ * @param array winner
+ *
+ * @return boolean
+ */
+function is_entry_acceptable(array $winner) :bool
+{
+    if (($winner['prize_year'] > 1968 && $winner['prize_year'] <= date("Y"))
+        && ($winner['author_name'] != "" && $winner['book_name'] != "" && $winner['author_nationality'] != "")
+        && (strlen($winner['author_name']) > 6 && strlen($winner['author_name']) < 200)
+        && (strlen($winner['book_name']) > 6 && strlen($winner['book_name']) < 300)
+        && (strlen($winner['author_nationality']) > 2 && strlen($winner['author_nationality']) < 50))
+    {
+        return $acceptable = true;
+    } else
+    {
+        return $acceptable = false;
+    }
 }
 
 /**
