@@ -1,0 +1,48 @@
+/* General */
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700&display=swap');
+
+body {
+    margin: 0 auto;
+    text-align: center;
+    font-family: 'raleway'; sans-serif;
+}
+
+/* Index page */
+
+.winner_list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.winner {
+    border: 1px solid #000;
+    width: 300px;
+    margin: 20px;
+}
+
+button.add_winners {
+    background-color: #895C74;
+    height: 70px;
+    width: 300px;
+    text-transform: uppercase;
+    color: #FFF;
+    margin-bottom: 50px;
+}
+
+input.delete {
+    margin: 10px 0px 0px 0px;
+    background-color: #895C74;
+    color: #FFF;
+    width: 100px;
+    height: 40px;
+}
+
+button.add_winners a{
+    color: #000;
+    text-decoration: none;
+}
+
+/* Add winners page */
+

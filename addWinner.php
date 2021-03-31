@@ -7,6 +7,7 @@ $db = getDb();
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="style.css">
     <title>Booker Prize Winners</title>
 </head>
 
@@ -24,8 +25,6 @@ $db = getDb();
             <div><input type="text" placeholder="Author's nationality" name="author_nationality"/></div>
             <div><input type="submit" /></div>
         </form>
-
-         <span><a href="index.php">Go back</a></span>
     </div>
 
 <?php

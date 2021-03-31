@@ -34,12 +34,12 @@ function display_winners(array $winners) :string
         $output = 'There are no winners.';
     } else {
         foreach ($winners as $winner) {
-            $output .= '<h2>Prize year: ' . $winner['prize_year'] . '</h2>';
+            $output .= '<div class="winner"><h2>Prize year: ' . $winner['prize_year'] . '</h2>';
             $output .= '<div><span>Author: ' . $winner['author_name'] . '</span></div>';
             $output .= '<div><span>Title: ' . $winner['book_name'] . '</span></div>';
             $output .= '<div><span>Author nationality: ' . $winner['author_nationality'] . '</span></div>';
-            $output .= '<div><form method="post" action="delete.php"><input type="submit" name="delete" value="Delete">
-                        <input type="hidden" name="id" value="' . $winner['id'] . '"/></form></div>';
+            $output .= '<div><form method="post" action="delete.php"><input type="submit" name="delete" value="Delete" class="delete">
+                        <input type="hidden" name="id" value="' . $winner['id'] . '"/></form></div></div>';
         }
     }
     return $output;
@@ -102,7 +102,7 @@ function add_winner(object $db, array $winner) :bool
             $query->bindParam(':book_name', $winner['book_name']);
             $query->bindParam(':author_nationality', $winner['author_nationality']);
             $query->execute();
-            echo 'Thanks for adding more winners.';
+            echo 'Thanks for adding more winners. Either add more winners or <span><a href="index.php">go back.</a></span>';
             return true;
           } else {
             echo "Please fill in all fields.";

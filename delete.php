@@ -1,7 +1,12 @@
 <?php
 require "functions.php";
 $db = getDb();
-function delete_winner($db) {
+/**
+ * safe deletes the entry by id
+ *
+ * @param object $db
+ */
+function delete_winner(object $db) {
     $winner = $_POST['id'];
     $query=$db->prepare('UPDATE `booker_winners` SET `deleted` = 1 WHERE `id` = :id;');
     $query->bindParam(':id', $winner);
