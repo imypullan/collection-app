@@ -27,7 +27,7 @@ function add_winner(object $db, array $winner)
             $query->bindParam(':book_name', $winner['book_name']);
             $query->bindParam(':author_nationality', $winner['author_nationality']);
             $query->execute();
-            header('Location: index.php');
+            header('Location: index.php?success=Thanks for your submission.');
             exit;
         } else {
             header('Location: index.php?error=Please note, your submission failed.');

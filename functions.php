@@ -98,11 +98,14 @@ function get_winner_info(object $db)
 }
 
 /*
- * shows any errors
+ * shows any GET messages
  */
-function show_errors()
+function show_messages()
 {
     if (isset($_GET['error'])) {
         echo '<p>' . $_GET['error'] . '</p>';
+    }
+    if (isset($_GET['success'])) {
+        echo '<p>' . $_GET['success'] . '</p>';
     }
 }
