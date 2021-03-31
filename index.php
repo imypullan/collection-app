@@ -14,13 +14,14 @@ $winners = getWinners($db);
 <body>
 
     <h1>Booker Prize Winners</h1>
-
+    <div class="winner_list">
 <?php
 echo display_winners($winners);
 ?>
+    </div>
 
     <div class="addWinner">
-      <span><a href="addWinner.php">Add other winners:</a></span>
+        <a href="addWinner.php"><button class="add_winners">Add other winners</button></a>
     </div>
 
 
