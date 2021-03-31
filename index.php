@@ -17,6 +17,7 @@ $winners = get_winners($db);
 
     <div class="winner_list">
 <?php
+show_errors();
 echo display_winners($winners);
 ?>
     </div>

@@ -15,7 +15,7 @@ $db = get_db();
     <h1 class="title">Add other winners</h1>
 
     <div class="add_db_entry">
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+        <form action="add_to_db.php" method="post">
             <div class="entry_field"><label for="prize_year">Prize year:</label>
             <input type="number" name="prize_year"/></div>
             <div class="entry_field"><label for="author_name">Author's name:</label>
@@ -27,15 +27,6 @@ $db = get_db();
             <div class="entry_field"><input type="submit" class="entry_field submit"/></div>
             <div class="go_back"><span class="return"><a href="index.php">go back.</a></span></div>
         </form>
-
-
-<?php
-if(isset($_POST))
-{
-    $winner = test_input();
-    add_winner($db, $winner);
-}
-?>
     </div>
 </body>
 </html>

@@ -81,40 +81,6 @@ function test_input() :array
     } return [];
 }
 
-/*
- * Inserts new entry into the DB
- *
- * @param object DB of previous winners
- * @param validated array
- *
- * @return bool
- */
-function add_winner(object $db, array $winner) :bool
-{
-    if (!empty($_POST)) {
-        if (($winner['prize_year'] > 1968 && $winner['prize_year'] <= date("Y"))
-            && ($winner['author_name'] != "" && $winner['book_name'] != "" && $winner['author_nationality'] != "")
-            && (strlen($winner['author_name']) > 6 && strlen($winner['author_name']) < 200)
-                && (strlen($winner['book_name']) > 6 && strlen($winner['book_name']) < 300)
-                    && (strlen($winner['author_nationality']) > 2 && strlen($winner['author_nationality']) < 50))
-                    {
-            $query = $db->prepare('INSERT INTO `booker_winners` (`prize_year`, `author_name`, `book_name`, `author_nationality`) VALUES (:prize_year, :author_name, :book_name, :author_nationality);');
-            $query->bindParam(':prize_year', $winner['prize_year']);
-            $query->bindParam(':author_name', $winner['author_name']);
-            $query->bindParam(':book_name', $winner['book_name']);
-            $query->bindParam(':author_nationality', $winner['author_nationality']);
-            $query->execute();
-            echo 'Thanks for adding more winners.';
-            return true;
-          } else {
-            echo '<span class="error_form_incomplete">Please fill in all fields.</span>';
-            return false;
-        }
-    } else {
-        return false;
-    }
-}
-
 /**
  * finds the entry to edit
  *
@@ -129,4 +95,14 @@ function get_winner_info(object $db)
     $query->execute();
     $winner = $query->fetch();
     return $winner;
+}
+
+/*
+ * shows any errors
+ */
+function show_errors()
+{
+    if (isset($_GET['error'])) {
+        echo '<p>' . $_GET['error'] . '</p>';
+    }
 }
