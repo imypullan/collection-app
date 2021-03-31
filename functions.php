@@ -88,6 +88,22 @@ function test_input() :array
     } return [];
 }
 
+/**
+ * finds the entry to edit
+ *
+ * @param object $db
+ *
+ * @return array
+ */
+function get_winner_info(object $db)
+{
+    $query = $db->prepare('SELECT `id`, `prize_year`, `author_name`, `book_name`, `author_nationality` FROM `booker_winners` WHERE `id` = :id;');
+    $query->bindParam(':id', $_POST['id']);
+    $query->execute();
+    $winner = $query->fetch();
+    return $winner;
+}
+
 /*
  * shows any GET messages
  */
