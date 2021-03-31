@@ -12,9 +12,10 @@ $db = get_db();
 </head>
 
 <body>
+    <h1 class="title">Add other winners</h1>
+
     <div class="add_db_entry">
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-            <h3>Add other winners:</h3>
             <div class="entry_field"><label for="prize_year">Prize year:</label>
             <input type="number" name="prize_year"/></div>
             <div class="entry_field"><label for="author_name">Author's name:</label>
@@ -24,6 +25,7 @@ $db = get_db();
             <div class="entry_field"><label for="author_nationality">Author's nationality:</label>
             <input type="text" name="author_nationality"/></div>
             <div class="entry_field"><input type="submit" class="entry_field submit"/></div>
+            <div class="go_back"><span class="return"><a href="index.php">go back.</a></span></div>
         </form>
 
 

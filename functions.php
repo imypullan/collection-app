@@ -104,7 +104,7 @@ function add_winner(object $db, array $winner) :bool
             $query->bindParam(':book_name', $winner['book_name']);
             $query->bindParam(':author_nationality', $winner['author_nationality']);
             $query->execute();
-            echo 'Thanks for adding more winners. Either add more winners or <span class="return"><a href="index.php">go back.</a></span>';
+            echo 'Thanks for adding more winners.';
             return true;
           } else {
             echo '<span class="error_form_incomplete">Please fill in all fields.</span>';

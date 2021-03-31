@@ -15,6 +15,7 @@ span {
 
 .title {
     text-align: center;
+    margin-bottom: 0px;
 }
 
 .winner_list {
@@ -64,7 +65,7 @@ button.add_winners a{
 /* Add winners page */
 
 .add_db_entry {
-    margin: 100px auto 50px auto;
+    margin: 30px auto 50px auto;
     width: 300px;
     background-color: #895C74;
     border: 7px solid #000;
@@ -101,4 +102,10 @@ button.add_winners a{
 
 .return a{
     color: #FFF;
+}
+
+/* edit page */
+
+.edit_db_entry {
+    display: flex;
 }
