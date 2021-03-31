@@ -1,6 +1,6 @@
 <?php
 require "functions.php";
-$db = getDb();
+$db = get_db();
 /**
  * safe deletes the entry by id
  *
