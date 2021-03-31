@@ -39,5 +39,4 @@ class Functions extends TestCase
         $data = ["i", "hate", "tests"];
         validate_input($data);
     }
-
 }

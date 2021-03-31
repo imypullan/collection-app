@@ -1,4 +1,4 @@
-<?
+<?php
 
 /*
  * Returns a new PDO connection
@@ -13,7 +13,14 @@ function get_db() :PDO
     return $db;
 }
 
-function get_winners($db)
+/*
+ * retrieves list of winners from db
+ *
+ * @param object db
+ *
+ * @return array
+ */
+function get_winners(object $db) :array
 {
     $query = $db->prepare('SELECT `id`, `prize_year`, `author_name`, `book_name`, `author_nationality` FROM `booker_winners` WHERE `deleted` = 0 ORDER BY `prize_year` DESC;');
     $query->execute();
@@ -79,22 +86,6 @@ function test_input() :array
             return $winner;
       }
     } return [];
-}
-
-/**
- * finds the entry to edit
- *
- * @param object $db
- *
- * @return array
- */
-function get_winner_info(object $db)
-{
-    $query = $db->prepare('SELECT `id`, `prize_year`, `author_name`, `book_name`, `author_nationality` FROM `booker_winners` WHERE `id` = :id;');
-    $query->bindParam(':id', $_POST['id']);
-    $query->execute();
-    $winner = $query->fetch();
-    return $winner;
 }
 
 /*
